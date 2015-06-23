@@ -9,4 +9,5 @@ Gem::Specification.new do |s|
   s.files       = ["lib/verboss.rb"]
   s.homepage    = 'https://github.com/Ben-Behar/verboss'
   s.license     = 'MIT'
+  s.add_runtime_dependency 'rainbow'
 end
