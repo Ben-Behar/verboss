@@ -180,7 +180,7 @@ module Verboss
     # save a reference to the two IO's
     out = $stdout
     err = $stderr
-    out.puts "/ #{description.to_s.fixed_width(WIDTH-14).bold} ".magenta + "\\"
+    out.puts "/ #{description.to_s.fixed_width(WIDTH-3).bold} ".magenta + "\\"
     begin # IO and Thread stuffs
       Verboss.start_spinner
       read_out, write_out = IO.pipe
@@ -191,7 +191,7 @@ module Verboss
       err_thread = Thread.new { err.print @@err_indent + read_err.gets("\n") until read_err.eof? }
       ret = yield
     rescue Exception => msg
-      err.puts "# #{description.to_s.fixed_width(WIDTH-14)} FAIL ".bold.red
+      err.puts "# #{description.to_s.fixed_width(WIDTH-15)} FAIL ".bold.red
       raise msg
     ensure # whether or not the block fails close the pipes
       write_out.close
@@ -200,7 +200,8 @@ module Verboss
       err_thread.join
       Verboss.stop_spinner
     end
-    out.puts "\\ #{"_ " * 14}".magenta + "DONE".green.bold + " in #{Time.now - start_time}s".fixed_width(14).cyan + " _ _ _ _ _ _ _ /".magenta
+
+    out.puts "\\ #{"_ " * (WIDTH - 22)/4}".magenta + "DONE".green.bold + " in #{Time.now - start_time}s".fixed_width(14).cyan + "#{" _" * (WIDTH - 22)/4} /".magenta
     return ret
   ensure # both IO's go back the way they were found
     $stderr = err
