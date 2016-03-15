@@ -180,7 +180,7 @@ module Verboss
     # save a reference to the two IO's
     out = $stdout
     err = $stderr
-    out.puts "/ #{description.to_s.fixed_width(WIDTH-4).bold} ".magenta + "\\"
+    out.puts "/ #{description.to_s.fixed_width(WIDTH-14).bold} ".magenta + "\\"
     begin # IO and Thread stuffs
       Verboss.start_spinner
       read_out, write_out = IO.pipe
@@ -191,7 +191,7 @@ module Verboss
       err_thread = Thread.new { err.print @@err_indent + read_err.gets("\n") until read_err.eof? }
       ret = yield
     rescue Exception => msg
-      err.puts "# #{description.to_s.fixed_width(WIDTH-4)} FAIL ".bold.red
+      err.puts "# #{description.to_s.fixed_width(WIDTH-14)} FAIL ".bold.red
       raise msg
     ensure # whether or not the block fails close the pipes
       write_out.close
@@ -212,7 +212,7 @@ module Verboss
     # save a reference to the two IO's
     out = $stdout
     err = $stderr
-    out.puts description.to_s.fixed_width(WIDTH-10).bold.magenta  + "  ... ".bold.blue if description
+    out.puts description.to_s.fixed_width(WIDTH-18).bold.magenta  + "  ... ".bold.blue if description
     begin # IO and Thread stuffs
       Verboss.start_spinner
       $stderr = StringIO.new
@@ -221,7 +221,7 @@ module Verboss
     rescue Exception => msg
       if description
         err.print "\e[1A"
-        err.print "# #{description.to_s.fixed_width(WIDTH-6)}".red
+        err.print "# #{description.to_s.fixed_width(WIDTH-16)}".red
       end
       err.puts "FAIL".bold.red
       raise msg
@@ -230,7 +230,7 @@ module Verboss
     end
     if description
       out.print "\e[1A"
-      out.puts description.to_s.fixed_width(WIDTH-8).bold.magenta + "DONE".green.bold + " in #{Time.now - start_time}s".fixed_width(14).cyan
+      out.puts description.to_s.fixed_width(WIDTH-18).bold.magenta + "DONE".green.bold + " in #{Time.now - start_time}s".fixed_width(14).cyan
     end
     return ret
   ensure # both IO's go back the way they were found
