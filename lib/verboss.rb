@@ -14,7 +14,7 @@
  #
 require 'format'
 module Verboss
-  WIDTH = 64
+  WIDTH = `tput cols`.to_i rescue WIDTH = 64
   @@err_indent = "$ ".magenta
   @@out_indent = "| ".magenta
   @@root_stderr = $stderr
