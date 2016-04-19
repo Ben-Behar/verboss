@@ -14,7 +14,7 @@
  #
 require 'format'
 module Verboss
-  WIDTH = `tput cols`.to_i rescue WIDTH = 64
+  WIDTH = `tput cols`.to_i rescue WIDTH = 64 # get number of terminal columns and stick with it # defaults to 64 
   @@err_indent = "$ ".magenta
   @@out_indent = "| ".magenta
   @@root_stderr = $stderr
@@ -213,7 +213,7 @@ module Verboss
     # save a reference to the two IO's
     out = $stdout
     err = $stderr
-    out.puts description.to_s.fixed_width(WIDTH-18).bold.magenta  + "  ... ".bold.blue if description
+    out.puts description.to_s.fixed_width(WIDTH-18).bold.magenta  + "....  ".bold.blue if description
     begin # IO and Thread stuffs
       Verboss.start_spinner
       $stderr = StringIO.new

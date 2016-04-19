@@ -6,13 +6,13 @@ Verboss focuses on understanding encapsulation.  By using the methods "quietly" 
 
     task :derp do
       def method args
-        puts "GET YER ARGS HUR: #{args}"
+        puts "one argument: #{args}"
       end
   
       Verbose.loudly "Doing a counting sort of thing" do
         (1..10).each do |num|
           method(num)
-          $stderr.puts "errrr?"
+          $stderr.puts "error!"
         end
       end
     end
@@ -20,13 +20,13 @@ Verboss focuses on understanding encapsulation.  By using the methods "quietly" 
 outputs the following:
   
     / Doing a counting sort of thing                              \
-    | GET YER ARGS HUR: 1
+    | one argument: 1
     $ errrr?
-    | GET YER ARGS HUR: 2
+    | one argument: 2
     $ errrr?
-    | GET YER ARGS HUR: 3
+    | one argument: 3
     $ errrr?
-    | GET YER ARGS HUR: 4
+    | one argument: 4
     \ _ _ _ _ _ _ _ _ _ _ _ _ _ _ DONE in 0.006s     _ _ _ _ _ _ _ /
 
 Verboss will capture everything that you have included in the block provided and format it for easier identification.
