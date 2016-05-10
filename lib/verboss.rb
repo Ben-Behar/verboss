@@ -201,7 +201,7 @@ module Verboss
       Verboss.stop_spinner
     end
 
-    out.puts "\\ #{"_ " * (WIDTH - 22)/4}".magenta + "DONE".green.bold + " in #{Time.now - start_time}s".fixed_width(14).cyan + "#{" _" * (WIDTH - 22)/4} /".magenta
+    out.puts "\\ #{"_ " * ((WIDTH - 22)/4)}".magenta + "DONE".green.bold + " in #{Time.now - start_time}s".fixed_width(14).cyan + "#{" _" * (WIDTH - 22)/4} /".magenta
     return ret
   ensure # both IO's go back the way they were found
     $stderr = err
