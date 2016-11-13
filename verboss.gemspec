@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'verboss'
-  s.version     = '0.1.1'
+  s.version     = '0.1.2'
   s.date        = '2016-04-20'
   s.summary     = "verboss is a terminal output management solution"
   s.description = "lightweight and simple terminal formatting"
